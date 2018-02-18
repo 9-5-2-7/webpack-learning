@@ -86,11 +86,31 @@ body {
 ```
 
 ### strip unused css
+- purifycss-webpack
 
 ### long-term caching
+- [hash]
+- [chunkhash]
 
 ### webpack manifests
+```js
+    ...
+    plugins: [
+        ...
+
+        function () {
+            this.plugin('done', stats => {
+                require('fs').writeFileSync(
+                    path.join(__dirname, 'dist/manifest.json'),
+                    JSON.stringify(stats.toJson().assetsByChunkName)
+                );
+            })
+        }
+    ]
+```
 
 ### automatic image optimization
+- img-loader
 
 ### developing webpack plugins
+- build/plugins/BuildManifestPlugin.js
